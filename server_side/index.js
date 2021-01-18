@@ -4,6 +4,7 @@ const app=express();
 app.use(cors())
 app.use(express.json())
 app.post('/hai',(req,res)=>{
+    console.log(req.body)
     if(req.body==='hai'){
         res.send('hello rishi , backend connected ')
     }
