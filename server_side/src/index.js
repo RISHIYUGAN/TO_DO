@@ -9,7 +9,7 @@ require('../Database/mongoose')
 
 app.post('/todo-list',(req,res)=>{
     const user=new User(req.body.todo)
-    res.send(user)
+    res.send(user);
    
 })
 app.listen(port,()=>{
