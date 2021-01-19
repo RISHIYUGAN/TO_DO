@@ -7,13 +7,13 @@ export const Dashboard=()=>{
        e.preventDefault();
      console.log(e.target.test.value);
      const value=e.target.test.value
-    //  axios.post('http://localhost:3000/todo-list',{todo:value})
-    //  .then((res)=>{
-    //    console.log("response:",res.data)
-    //  })
-    //  .catch((error)=>{
-    //    console.log(error) 
-    //  })
+     axios.post('http://localhost:3000/todo-list',{todo:value})
+     .then((res)=>{
+       console.log("response:",res.data)
+     })
+     .catch((error)=>{
+       console.log(error) 
+     })
    }
     return(
       <div className="Parent-Div">
