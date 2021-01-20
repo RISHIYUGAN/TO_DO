@@ -3,10 +3,9 @@
   src: url("../../poppins/poppins/poppins-v5-latin-200.ttf");
 }
 .Dashboard-container {
-  margin-top: 100px;
   width: 90vw;
-  height:85%;
-  margin: 100px auto 0px auto;
+  height:87%;
+  margin: 80px auto 0px auto;
   overflow: auto;
   background-color: white;
   border-radius: 20px;
@@ -19,7 +18,7 @@
 }
 
 .AddWorkButton {
-  margin-right: 40px;
+  margin-right: 5%;
   padding: 5px 10px;
   border-radius: 20px;
   background: linear-gradient(45deg, rgb(10, 255, 10), rgb(20, 211, 218));
@@ -32,7 +31,12 @@
 }
 .AddButtonDiv {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
+}
+.completed{
+  margin-left:5%;
+  font-weight: bold;
+  font-size: 20px;
 }
 .inputContainer {
   position: absolute;
@@ -145,4 +149,55 @@
     width:100vw;
     height:100vh;
     overflow: auto;
+}
+.todo-List{
+    margin-top:10px;
+    width: 90%;
+    margin:10px auto 0px auto;
+    height: 77%;
+    border:4px solid grey;
+    border-radius: 10px;
+    background-color: rgba(128, 128, 128, 0.767);
+    box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.876);
+}
+.eachWork{
+  color:white;
+  padding:5px 10px;
+}
+.break-line{
+  width:100%;
+  height:4px;
+  background-color:white ;
+}
+.work-content{
+  padding:20px 0px;
+  font-size: 25px;
+  font-weight: bold;
+  display: flex;
+  justify-content: space-between;
+}
+.content-end{
+  width:8px;
+  height:8px;
+  background-color: white;
+  border-radius: 50%;
+  margin-left: 20px;
+}
+.content-end-wrapper{
+  display: flex;
+  justify-content: center;
+}
+.Mark-button{
+  height:30px;
+  border-radius: 20px;
+  border:none;
+  outline:none;
+  background-color: rgb(26, 236, 26);
+  margin-right: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.801);
+  padding:0px 10px;
+  cursor:pointer;
+}
+.Mark-button:hover{
+  background-color:rgb(43, 251, 43) ;
 }

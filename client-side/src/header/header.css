@@ -4,7 +4,7 @@
 }
 .header-container{
     background-color: grey;
-    height:90px;
+    height:70px;
     width:95vw;
     position:fixed;
     border-radius: 20px;
@@ -17,13 +17,13 @@
     z-index:2;
 }
 .todo-logo{
-    width:80px;
-    height:75px;
+    width:60px;
+    height:55px;
     margin-left: 20px;
 }
 .header-title{
     padding-left:10px;
-    font-size:35px;
+    font-size:30px;
     font-family:Arial, Helvetica, sans-serif 
 }
 .To{
@@ -33,9 +33,9 @@
     color:rgb(184, 7, 7)
 }
 .pencil{
-    width:60px;
-    height:60px;
-    margin-left:-70px;
+    width:50px;
+    height:50px;
+    margin-left:-60px;
     margin-top: 40px;
     transform: rotate(225deg);
 }
