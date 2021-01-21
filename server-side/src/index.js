@@ -10,7 +10,9 @@ require('../Database/mongoose')
 
 app.post('/todo',(req,res)=>{
     const _id= req.body.token
+    console.log("id:",_id)
     User.findById({_id:_id}).then((use)=>{
+        console.log("use",use)
         res.send(use);
     })
 })
