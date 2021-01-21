@@ -3,6 +3,7 @@ import axios from "axios"
 import {Header} from "../header/header"
 import {Dashboard} from "../pages/dashboard/dashboard"
 import {useEffect} from "react"
+import {AppRouter} from "../router/Router"
 
 function App() {
 useEffect(()=>{
@@ -17,8 +18,7 @@ useEffect(()=>{
  
   return (
     <div className="App-container">
-      <Header/>
-      <Dashboard/>
+      <AppRouter/>
     </div>
   );
 }
