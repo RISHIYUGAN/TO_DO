@@ -1,22 +1,26 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState} from "react";
 import "./dashboard.css";
 import axios from "axios";
+import tick from "../../images/tick.png"
 
 export const Dashboard = () => {
   const [worklist, setWorklist] = useState([
-    { content: "do my application", completed: false },
-    { content: "test my application", completed: false },
-    { content: "finish my application", completed: false },
+    // { content: "do my application", completed: false },
+    // { content: "test my application", completed: false },
+    // { content: "finish my application", completed: false },
   ]);
-  let i = 0;
+
+  let i=0;
   const submitting = (e) => {
     e.preventDefault();
     console.log(e.target.test.value);
     const value = e.target.test.value;
+    const update=[{content:e.target.test.value,completed:false},...worklist]
+    console.log(update)
     axios
       .post("http://localhost:3000/todo-list", {
         id: "60070dc0afd83a2b600b9a69",
-        todolist: worklist,
+        todolist:update,
       })
       .then((res) => {
         console.log("response:", res.data);
@@ -25,7 +29,19 @@ export const Dashboard = () => {
       .catch((error) => {
         console.log(error);
       });
+      setWorklist([{content:e.target.test.value,completed:false},...worklist])
   };
+  const complete=(index,e)=>{
+     if(e.target.innerHTML==="Mark as done"){
+    const copy=[...worklist]
+    copy[index].completed=true;
+    copy.splice(worklist.length,0,worklist[index])
+    copy.splice(index,1)
+    console.log(copy)
+    setWorklist(copy)
+     }
+  }
+
   return (
     <div className="Parent-Div">
       <div className="Dashboard-container">
@@ -84,11 +100,13 @@ export const Dashboard = () => {
           </button>
         </div>
         <div className="todo-List">
-          {worklist.map((work) => (
+          {worklist.length!==0? worklist.map((work) => (
             <div className="eachWork">
               <div className="work-content">
                 {work.content}
-                <button className="Mark-button">Mark as done</button>
+                <button className="Mark-button" onClick={(e)=>{complete(worklist.indexOf(work),e)}}>
+                  {work.completed?<Fragment><img className="tick" src={tick}/>Completed</Fragment>:<Fragment>Mark as done</Fragment>}
+                  </button>
               </div>
               {worklist.indexOf(work) !== worklist.length - 1 ? (
                 <div className="break-line"></div>
@@ -104,7 +122,7 @@ export const Dashboard = () => {
                 </div>
               )}
             </div>
-          ))}
+          )):<div className="No-content"><text className="No">No&nbsp;</text>works to do</div>}
         </div>
         <form
           onSubmit={(e) => {
