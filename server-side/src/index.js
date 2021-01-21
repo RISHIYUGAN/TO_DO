@@ -8,21 +8,23 @@ app.use(cors())
 require('../Database/mongoose')
 
 
+app.post('/todo',(req,res)=>{
+    const _id= req.body.token
+    User.findById({_id:_id}).then((use)=>{
+        res.send(use);
+    })
+})
 
-
-
-
-
-app.post('/todo-list',(req,res)=>{
-   const _id= "60083ebd81a29639dc9e1fcb"
+app.post('/update_todo',(req,res)=>{
+   const _id= req.body.token
    if(req.body){
-       User.findById({_id:_id}).then((use)=>{
-            res.send(use)
-            res.send('response reached')
-       })
+       User.findById({_id:_id}).then(async (use)=>{
+           console.log("test",req.body.todolist)
+           console.log("testing",req.body)
+           await User.updateOne({_id:_id},{todo:req.body.todolist})
+            res.send('updated')
+        })
    }
-    
-    
     // const use=req.body.todolist;
     // console.log("test",_id)
     // console.log("testing",use)
