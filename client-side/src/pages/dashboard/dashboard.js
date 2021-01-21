@@ -1,4 +1,4 @@
-import React, { Fragment, useState} from "react";
+import React, { Fragment, useState,useEffect} from "react";
 import "./dashboard.css";
 import axios from "axios";
 import tick from "../../images/tick.png"
@@ -10,6 +10,14 @@ export const Dashboard = () => {
     // { content: "finish my application", completed: false },
   ]);
 
+  useEffect(()=>{
+   axios.post("http://localhost:3000/todo",
+   {token:"60083ebd81a29639dc9e1fcb"})
+   .then((res)=>{
+   console.log(res.body)
+   })
+  },[])
+
   let i=0;
   const submitting = (e) => {
     e.preventDefault();
@@ -18,18 +26,18 @@ export const Dashboard = () => {
     const update=[{content:e.target.test.value,completed:false},...worklist]
     console.log(update)
     axios
-      .post("http://localhost:3000/todo-list", {
-        id: "60083ebd81a29639dc9e1fcb",
+      .post("http://localhost:3000/update_todo", {
+        token: "60083ebd81a29639dc9e1fcb",
         todolist:update,
       })
       .then((res) => {
         console.log("response:", res.data);
         e.target.test.value = "";
+        setWorklist([{content:e.target.test.value,completed:false},...worklist])
       })
       .catch((error) => {
         console.log(error);
       });
-      setWorklist([{content:e.target.test.value,completed:false},...worklist])
   };
   const complete=(index,e)=>{
      if(e.target.innerHTML==="Mark as done"){
