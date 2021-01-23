@@ -1,0 +1,198 @@
+.login-image{
+    width:100vw;
+    background-image: url("../../images/login.jpg");
+    height: 100vh;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+}
+.Login-Container{
+  width:100vw;
+  height:100vh;
+  position:fixed;
+  top: 0px;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+}
+.Login{
+    font-family: poppins;
+    border:3px solid black;
+  background: rgba(10, 10, 10, 0.609);
+  box-shadow: 0 0 30px black;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border-radius: 10px;
+  padding:10px 40px;
+  width:35vw;
+  height:400px;
+}
+.Login-text{
+    color:white;
+    text-align: center;
+}
+.division_1{
+    width:95%;
+    margin:auto;
+    height: 30px;
+    border-bottom:4px solid white;
+    transition:border-bottom 1s;
+  }
+  
+  .division_1:focus-within{
+    border-bottom:4px solid red
+  }
+  .division_2{
+    width:95%;
+    margin:auto;
+    height: 30px;
+    border-bottom:4px solid white;
+    transition:border-bottom 1s;
+  }
+  
+  .division_2:focus-within{
+    border-bottom:4px solid red
+  }
+  .division_3{
+    width:95%;
+    margin:auto;
+    height: 30px;
+    border-bottom:4px solid white;
+    transition:border-bottom 1s;
+  }
+  
+  .division_3:focus-within{
+    border-bottom:4px solid red
+  }
+  .division_4{
+    width:95%;
+    margin:auto;
+    height: 30px;
+    border-bottom:4px solid white;
+    transition:border-bottom 1s;
+  }
+  
+  .division_4:focus-within{
+    border-bottom:4px solid red
+  }
+  .division_5{
+    width:95%;
+    margin:auto;
+    height: 30px;
+    border-bottom:4px solid white;
+    transition:border-bottom 1s;
+  }
+  
+  .division_5:focus-within{
+    border-bottom:4px solid red
+  }
+  
+.input{
+    outline:none;
+    border:none ;
+    width: 100%;
+    color: white;
+    background-color:transparent;
+    -webkit-tap-highlight-color: none;  
+}
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  background-color: transparent;
+    transition: background-color 5000s ease-in-out 0s;
+    -webkit-text-fill-color: #fff !important;
+    caret-color: white;
+}
+
+input:focus{
+  outline:none;
+  background-color: transparent;
+}
+
+.input::placeholder {
+    /* color: rgba(0, 255, 34, 0.575); */
+    color:skyblue;
+    font-size: medium;
+    font-weight: bold;
+  }
+
+  .Submitbutton{
+      border:none;
+      background:linear-gradient(rgb(43, 255, 43),rgb(3, 134, 3));
+      border-radius: 10px; 
+      cursor: pointer;
+      outline:none;
+      box-shadow: 0 0 6px black;
+      padding:5px 10px;
+  }
+  .Submitbutton:disabled{
+    background-color:rgba(9, 238, 59, 0.548) ;
+  }
+
+  .ExitButton{
+    cursor: pointer;
+    position:absolute;
+    right:7px;
+    top:-35px;
+    padding:0px 7px 4px 7px;
+    border-radius: 50%;
+    color: rgb(216, 16, 16);
+    font-size: 25px;
+  }
+
+  .Register{
+    color:rgba(0, 38, 255, 0.733);
+    cursor: pointer;
+    font-size: 22px;
+  }
+@media only screen and (max-width:600px){
+    .Login{
+        font-family: poppins;
+        border:3px solid black;
+      background: rgba(10, 10, 10, 0.609);
+      box-shadow: 0 0 30px black;
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      border-radius: 10px;
+      padding:10px 20px;
+      width:60vw;
+      height:400px;
+  }
+  .division_1{
+    width:100%;
+    margin:auto;
+    height: 30px;
+    border-bottom:4px solid white;
+    transition:border-bottom 1s;
+  }
+  .division_2{
+    width:100%;
+    margin:auto;
+    height: 30px;
+    border-bottom:4px solid white;
+    transition:border-bottom 1s;
+  }
+  .division_3{
+    width:100%;
+    margin:auto;
+    height: 30px;
+    border-bottom:4px solid white;
+    transition:border-bottom 1s;
+  }
+  .division_4{
+    width:100%;
+    margin:auto;
+    height: 30px;
+    border-bottom:4px solid white;
+    transition:border-bottom 1s;
+  }
+  .division_5{
+    width:100%;
+    margin:auto;
+    height: 30px;
+    border-bottom:4px solid white;
+    transition:border-bottom 1s;
+  }
+}

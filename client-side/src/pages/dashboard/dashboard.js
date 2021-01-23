@@ -1,7 +1,8 @@
 import React, { Fragment, useState,useEffect} from "react";
 import "./dashboard.css";
 import axios from "axios";
-import tick from "../../images/tick.png"
+import tick from "../../images/tick.png";
+import {Header} from "../../header/header";
 
 export const Dashboard = () => {
   const [worklist, setWorklist] = useState([
@@ -14,7 +15,7 @@ export const Dashboard = () => {
    axios.post("http://localhost:3000/todo",
    {token:"60083ebd81a29639dc9e1fcb"})
    .then((res)=>{
-   console.log(res.body)
+   console.log(res.data)
    })
   },[])
 
@@ -51,7 +52,10 @@ export const Dashboard = () => {
   }
 
   return (
+    <div>
+    <Header/>
     <div className="Parent-Div">
+      {console.log(worklist)}
       <div className="Dashboard-container">
         <div className="titleDiv">
           <h2 className="D-title">
@@ -175,6 +179,7 @@ export const Dashboard = () => {
           </div>
         </form>
       </div>
+    </div>
     </div>
   );
 };
