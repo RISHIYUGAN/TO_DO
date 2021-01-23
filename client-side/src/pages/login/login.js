@@ -36,6 +36,7 @@ export const Login=()=>{
       }
       
   const newUser=(e)=>{
+    e.preventDefault()
 //     if(document.querySelector("#Sign_upMessage").innerHTML="! Email already exists"){
 //       document.querySelector("#Sign_upMessage").innerHTML=""
 //  }
@@ -46,7 +47,8 @@ axios.post("http://localhost:3000/signup",{signup:signupDetails})
   console.log(res.data)
 })
   }
-  const logging=()=>{
+  const logging=(e)=>{
+    e.preventDefault()
     axios.post("http://localhost:3000/login",{login:loginDetails})
     .then((res)=>{
       console.log(res.data)
@@ -63,7 +65,7 @@ axios.post("http://localhost:3000/signup",{signup:signupDetails})
                     <h2>LOGIN</h2>
                     </div>
                     <div>
-                    <form onSubmit={()=>{logging()}}  autoComplete="on">
+                    <form onSubmit={(e)=>{logging(e)}}  autoComplete="on">
             <div  className="division_1">
             <input name="email" onChange={(e)=>{setLoginDetails({...loginDetails,email:e.target.value})}}   type="email" className="input" placeholder="*Email-id" />
             </div>
