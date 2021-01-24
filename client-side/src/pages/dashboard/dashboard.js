@@ -13,9 +13,10 @@ export const Dashboard = () => {
 
   useEffect(()=>{
    axios.post("http://localhost:3000/todo",
-   {token:"60083ebd81a29639dc9e1fcb"})
+   {token:localStorage.getItem("tok")})
    .then((res)=>{
    console.log(res.data)
+   setWorklist(res.data.todo)
    })
   },[])
 
@@ -28,13 +29,13 @@ export const Dashboard = () => {
     console.log(update)
     axios
       .post("http://localhost:3000/update_todo", {
-        token: "60083ebd81a29639dc9e1fcb",
+        token: localStorage.getItem("tok"),
         todolist:update,
       })
       .then((res) => {
         console.log("response:", res.data);
-        e.target.test.value = "";
         setWorklist([{content:e.target.test.value,completed:false},...worklist])
+        e.target.test.value = "";
       })
       .catch((error) => {
         console.log(error);
@@ -42,12 +43,21 @@ export const Dashboard = () => {
   };
   const complete=(index,e)=>{
      if(e.target.innerHTML==="Mark as done"){
-    const copy=[...worklist]
-    copy[index].completed=true;
-    copy.splice(worklist.length,0,worklist[index])
-    copy.splice(index,1)
-    console.log(copy)
-    setWorklist(copy)
+      const update=[...worklist]
+      update[index].completed=true;
+      update.splice(worklist.length,0,worklist[index])
+      update.splice(index,1)
+      axios
+      .post("http://localhost:3000/update_todo", {
+        token: localStorage.getItem("tok"),
+        todolist:update,
+      }).then((res)=>{
+        console.log(res.data)
+        setWorklist(update)
+      })
+   
+    console.log(update)
+   
      }
   }
 
@@ -168,7 +178,7 @@ export const Dashboard = () => {
                 <i class="fa fa-tasks fa-lg"></i>
                 <input
                   name="test"
-                  className="input"
+                  className="d-input"
                   type="text"
                   placeholder="Enter work"
                 />

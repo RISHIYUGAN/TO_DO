@@ -10,15 +10,7 @@ import { Provider } from 'react-redux';
 export const store=configurestore();
 
 function App() {
-useEffect(()=>{
-  axios.post('http://localhost:3000/hai',{hai:"hai"})
-  .then((res)=>{
-    console.log(res.data)
-  })
-  .catch((error)=>{
-    console.log(error)
-  })
-},[])  
+
  
   return (
     <div className="App-container">

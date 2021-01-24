@@ -3,7 +3,7 @@ import {Router,Route,Switch} from "react-router-dom"
 import createHistory from "history/createBrowserHistory"
 import {Dashboard} from "../pages/dashboard/dashboard"
 import Login from "../pages/login/login"
-import {Header} from "../header/header"
+import Header from "../header/header"
 import PublicRoute from "./PublicRoute"
 import PrivateRoute from "./PrivateRoute"
 
