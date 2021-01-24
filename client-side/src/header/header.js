@@ -9,6 +9,7 @@ export const Header=()=>{
           <img src={logo} className="todo-logo"/>
           <span><h1 className="header-title"><span className="To">To</span><span className="Do">Do</span></h1></span>
           <img src={pencil} className="pencil"/>
+          <div style={{float:"right"}}></div>
         </div>
     )
 }

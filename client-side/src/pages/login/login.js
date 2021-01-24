@@ -2,7 +2,10 @@ import React,{useState} from "react"
 import "./login.css"
 import axios from "axios" 
 import login_image from "../../images/login-image.jpg"
-export const Login=()=>{
+import {connect} from "react-redux"
+import {AuthChange} from "../../Redux/actions"
+
+const Login=(props)=>{
     const [signup, setSignup] = useState(true);
     const [signupDetails,setSignupDetails]=useState({
         name:"",
@@ -49,8 +52,11 @@ axios.post("http://localhost:3000/signup",{signup:signupDetails})
   const logging=()=>{
     axios.post("http://localhost:3000/login",{login:loginDetails})
     .then((res)=>{
-      console.log(res.data)
-    })
+      console.log(res.data);
+      localStorage.setItem("tok",res.data.token);
+      props.dispatch(AuthChange(localStorage.getItem("tok")))
+
+    })   
   }
 
     return(
@@ -165,3 +171,5 @@ axios.post("http://localhost:3000/signup",{signup:signupDetails})
         </div>
     )
 }
+
+export default connect()(Login)

@@ -53,7 +53,6 @@ export const Dashboard = () => {
 
   return (
     <div>
-    <Header/>
     <div className="Parent-Div">
       {console.log(worklist)}
       <div className="Dashboard-container">
@@ -183,3 +182,5 @@ export const Dashboard = () => {
     </div>
   );
 };
+
+
