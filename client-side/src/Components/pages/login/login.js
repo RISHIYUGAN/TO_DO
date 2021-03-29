@@ -46,14 +46,14 @@ const Login=(props)=>{
 //  }
 //     document.querySelector("#Sign_upMessage").innerHTML=""
 //     e.preventDefault();
-axios.post("http://localhost:3000/signup",{signup:signupDetails}) 
+axios.post("http://localhost:3000/signup",signupDetails) 
 .then((res)=>{
   console.log(res.data)
 })
   }
   const logging=(e)=>{
     e.preventDefault()
-    axios.post("http://localhost:3000/login",{login:loginDetails})
+    axios.post("http://localhost:3000/login",loginDetails)
     .then((res)=>{
       console.log(res.data);
       localStorage.setItem("tok",res.data.token);
