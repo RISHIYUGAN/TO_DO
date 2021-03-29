@@ -1,0 +1,110 @@
+@font-face {
+    font-family: OpenSans;
+    src: url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+  }
+.Sidebar{
+    height:100vh; 
+    max-height: 100vh;
+    float:left;
+    background-color: rgb(63, 63, 251);
+    font-size: calc(0.3em + 1vw);
+    background:linear-gradient(90deg,rgb(40, 40, 223) 65px,rgb(68, 68, 248) 10px);
+   
+}
+.Title{
+ color:white;
+ font-family:'Cutive Mono', monospace;
+ letter-spacing:2px;
+ margin-left:65px;
+ padding-left: 10px;
+ font-size: large;
+ display: flex;
+ color:rgb(180, 244, 255);
+}
+.NavContainer{
+    margin-top: 10px;
+}
+.eachNav{
+    display: flex;
+    flex-direction: column;
+    margin-bottom:40px;
+}
+.LogoDiv{
+    float:left;
+    width:7vw;
+    height: 100vh;
+    background-color: rgb(17, 17, 251);
+}
+.sideIcon>i{
+    font-weight:bolder;
+    font-size:30px;
+    padding-left: 20px;
+    color:rgb(235, 235, 235);
+}
+.navClass{
+    color:white;
+    text-decoration: none;
+}
+
+.navActive{
+    color:white;
+    text-decoration: none;
+}
+/* .navActive{
+    background-color: white;
+} */
+
+.iconDiv{
+    display: flex;
+    align-items: center;
+}
+.sidebarText{
+    display:flex;
+    height:100%;
+    width: 100%;
+    color:white;
+    justify-content:flex-start;
+    margin:auto 0px auto 10px;
+    font-size: 22px;
+    padding:5px 40px 5px 20px;
+    margin-left:14px;
+   -webkit-tap-highlight-color:transparent;
+     user-select: none;
+    font-family:'Abhaya Libre', serif;
+    font-weight: bold;
+    cursor: pointer;
+    /* background-color: rgba(2, 97, 251, 0.493);
+    background:linear-gradient(90deg,rgba(4, 253, 137, 0.466),rgb(68, 68, 248)) */
+}
+.iconDiv>text>i{
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left:10px;
+    cursor: pointer;
+    -webkit-tap-highlight-color:transparent;
+}
+.pencil{
+    width:70px;
+    height:70px;
+    margin-left:-85px;
+    margin-top: 40px;
+    transform: rotate(225deg);
+}
+.dropDown{
+    margin-left:80px;
+    padding-left:10px; 
+    margin-top: 5px;
+    
+}
+.dropDown>text{
+    font-family:'Abhaya Libre', serif;
+    font-weight: bold;
+    font-size: 19px;
+    color: rgb(218, 213, 213);
+    cursor: pointer;
+}
+.highlight{
+    color:rgb(4, 217, 255)!important;
+}

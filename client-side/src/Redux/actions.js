@@ -5,3 +5,6 @@ export const AuthChange=(token)=>({
 export const Authfalse=()=>({
     type:"Authfalse"
 })
+export const changePersonal=()=>({
+  type:"DashbdPersonal"
+})
