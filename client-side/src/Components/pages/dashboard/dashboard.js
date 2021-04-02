@@ -94,20 +94,20 @@ const Dashboard = (props) => {
   };
   const submitting = (e) => {
     e.preventDefault();
-    console.log(e.target.test.value);
-    const value = e.target.test.value;
-    let update=null;
-    if(props.personal===true){
-    update=[{content:e.target.test.value,completed:false},...personalworklist]
-    }
-    else{
-       update=[{content:e.target.test.value,completed:false},...Professionalworklist]
-    }
-    console.log(update)
+    // console.log(e.target.test.value);
+    // const value = e.target.test.value;
+    // let update=null;
+    // if(props.personal===true){
+    // update=[{content:e.target.test.value,completed:false},...personalworklist]
+    // }
+    // else{
+    //    update=[{content:e.target.test.value,completed:false},...Professionalworklist]
+    // }
+    // console.log(update)
     axios
       .post("http://localhost:3000/update_todo", {
         token: localStorage.getItem("tok"),
-        dailyactivity:update,
+        dailyactivity:e.target.test.value,
         type: props.personal?"personal":"professional",
         date:moment().format('DD/MM/YYYY')
       })
@@ -133,14 +133,15 @@ const Dashboard = (props) => {
        update.splice(personal.length,0,personal[index])
        update.splice(index,1)
        axios
-       .post("http://localhost:3000/update_todo", {
+       .post("http://localhost:3000/mark", {
          token: localStorage.getItem("tok"),
-         todolist:update,
+         dailyactivity:update,
+         type:props.personal?"personal":"professional",
+         date:moment().format('DD/MM/YYYY')
        }).then((res)=>{
          console.log(res.data)
          setPersonalworklist(update)
        })
-
      console.log(update)
       }
     const update = [...personalworklist];
