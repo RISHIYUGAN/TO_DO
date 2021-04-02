@@ -93,42 +93,56 @@ const Dashboard = (props) => {
     return ret;
   };
   const submitting = (e) => {
-    // e.preventDefault();
-    // console.log(e.target.test.value);
-    // const value = e.target.test.value;
-    // const update=[{content:e.target.test.value,completed:false},...worklist]
-    // console.log(update)
-    // axios
-    //   .post("http://localhost:3000/update_todo", {
-    //     token: localStorage.getItem("tok"),
-    //     todolist:update,
-    //   })
-    //   .then((res) => {
-    //     console.log("response:", res.data);
-    //     setWorklist([{content:e.target.test.value,completed:false},...worklist])
-    //     e.target.test.value = "";
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
+    e.preventDefault();
+    console.log(e.target.test.value);
+    const value = e.target.test.value;
+    let update=null;
+    if(props.personal===true){
+    update=[{content:e.target.test.value,completed:false},...personalworklist]
+    }
+    else{
+       update=[{content:e.target.test.value,completed:false},...Professionalworklist]
+    }
+    console.log(update)
+    axios
+      .post("http://localhost:3000/update_todo", {
+        token: localStorage.getItem("tok"),
+        dailyactivity:update,
+        type: props.personal?"personal":"professional",
+        date:moment().format('DD/MM/YYYY')
+      })
+      .then((res) => {
+        console.log("response:", res.data);
+        if(res.data.type==="personal"){
+          setPersonalworklist(res.data.activities)
+        }
+        else{
+          setProfessionalworklist(res.data.activities)
+        }
+        // setWorklist([{content:e.target.test.value,completed:false},...worklist])
+        e.target.test.value = "";
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
   const personalcomplete = (index, e) => {
-    //   if(e.target.innerHTML==="Mark as done"){
-    //    const update=[...worklist]
-    //    update[index].completed=true;
-    //    update.splice(personal.length,0,personal[index])
-    //    update.splice(index,1)
-    //    axios
-    //    .post("http://localhost:3000/update_todo", {
-    //      token: localStorage.getItem("tok"),
-    //      todolist:update,
-    //    }).then((res)=>{
-    //      console.log(res.data)
-    //      setWorklist(update)
-    //    })
+      if(e.target.innerHTML==="Mark as done"){
+       const update=[...personalworklist]
+       update[index].completed=true;
+       update.splice(personal.length,0,personal[index])
+       update.splice(index,1)
+       axios
+       .post("http://localhost:3000/update_todo", {
+         token: localStorage.getItem("tok"),
+         todolist:update,
+       }).then((res)=>{
+         console.log(res.data)
+         setPersonalworklist(update)
+       })
 
-    //  console.log(update)
-    //   }
+     console.log(update)
+      }
     const update = [...personalworklist];
     update[index].completed = true;
     update.splice(personalworklist.length, 0, personalworklist[index]);
