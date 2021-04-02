@@ -1,25 +1,27 @@
 import React, { useState, useEffect, Fragment } from "react";
 import tick from "../../../Assets/images/tick.png";
 import "./dashboard.css";
+import axios from "axios"
 import { UnderLine } from "../../utility/underline";
 import { connect } from "react-redux";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import { CircularProgressbarWithChildren } from "react-circular-progressbar";
 
 import "react-circular-progressbar/dist/styles.css";
+import moment from "moment";
 
 const Dashboard = (props) => {
   const [personal, setPersonal] = useState(props.personal);
   const [personalworklist, setPersonalworklist] = useState([
-    { content: "eat", completed: false },
-    { content: "sleep", completed: false },
-    { content: "rule", completed: true },
-    { content: "conquer", completed: true },
+    // { content: "eat", completed: false },
+    // { content: "sleep", completed: false },
+    // { content: "rule", completed: true },
+    // { content: "conquer", completed: true },
   ]);
   const [Professionalworklist, setProfessionalworklist] = useState([
-    { content: "do my application", completed: false },
-    { content: "test my application", completed: false },
-    { content: "finish my application", completed: true },
+    // { content: "do my application", completed: false },
+    // { content: "test my application", completed: false },
+    // { content: "finish my application", completed: true },
   ]);
   const [randomcolor, setRandomcolor] = useState([
     "red",
@@ -41,6 +43,22 @@ const Dashboard = (props) => {
   let prsts = 0;
   useEffect(() => {
     console.log("runningd");
+    axios
+      .post("http://localhost:3000/activity", {
+        token: localStorage.getItem("tok"),
+        type: props.personal?"personal":"professional",
+        date:moment()
+      })
+      .then((res)=>{
+        if(props.personal){
+          setPersonalworklist(res.data)
+        }
+        else{
+          setProfessionalworklist(res.data)
+        }
+      }
+       
+      )
   }, []);
   useEffect(() => {
     {
@@ -174,7 +192,9 @@ const Dashboard = (props) => {
       <div className="flexBox">
         <div className="dashTitle">
           <div>
+            <h5>
             Your Works
+            </h5>
             <UnderLine backgroundColor="red" />
           </div>
         </div>
@@ -206,7 +226,7 @@ const Dashboard = (props) => {
 
                 <text>
                   completed:
-                  <text style={{ color: "red", fontFamily: "sans seif" }}>
+                  <text style={{ color: "red", fontFamily: "poppins" }}>
                     {" "}
                     {psnlsts}
                   </text>{" "}
@@ -214,7 +234,7 @@ const Dashboard = (props) => {
                   <text
                     style={{
                       color: "rgb(9, 207, 9)",
-                      fontFamily: "sans serif",
+                      fontFamily: "poppins",
                     }}
                   >
                     {personalworklist.length}
@@ -246,47 +266,53 @@ const Dashboard = (props) => {
               </div>
             </div>
             <div className="input-wrapper">
+            <label>Enter your work</label>
+              <div>
               <div
                 className="inputDiv"
                 onFocus={() => {
                   var inputDiv = document.querySelector(".inputDiv");
-                  inputDiv.style.boxShadow = "0 0 15px rgba(0, 0, 0, 0.513)";
+                  // inputDiv.style.boxShadow="0 0 8px rgb(200, 200, 200)"
+                  inputDiv.style.border="1px solid rgb(108, 108, 255)"
                 }}
                 onBlur={() => {
                   var inputDiv = document.querySelector(".inputDiv");
                   inputDiv.style.boxShadow = "none";
+                  inputDiv.style.border="1px solid white"
                 }}
               >
                 <i class="fa fa-tasks fa-lg"></i>
+               
                 <input
                   name="test"
                   className="d-input"
                   type="text"
-                  placeholder="Enter work"
                 />
+                
               </div>
-              <button className="Add-Button">Add +</button>
+              <button className="Add-Button"><h3>Add +</h3></button>
+              </div>
             </div>
           </div>
         </form>
               {personalworklist.map((work) => (
                 <div
                   className="eachWork"
-                  style={{ borderLeft: `10px solid ${randomclrfun()}` }}
+                  style={{ borderLeft: `5px solid ${randomclrfun()}` }}
                 >
                   <div className="content">
                     {!work.completed ? (
-                      <Fragment>{`${work.content[0].toUpperCase()}${work.content.slice(
+                      <h4>{`${work.content[0].toUpperCase()}${work.content.slice(
                         1,
                         work.content.length
-                      )}`}</Fragment>
+                      )}`}</h4>
                     ) : (
-                      <Fragment>
+                      <h4>
                         <del>{`${work.content[0].toUpperCase()}${work.content.slice(
                           1,
                           work.content.length
                         )}`}</del>
-                      </Fragment>
+                      </h4>
                     )}
                   </div>
                   <div className="accDec">

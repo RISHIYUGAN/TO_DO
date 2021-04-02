@@ -10,7 +10,7 @@ export const UnderLine=(props)=>{
             border:"none",
             marginRight: "3px",
             width: "100%",
-            height: "5px",
+            height: "3px",
             backgroundColor: props.backgroundColor,
           }}
         ></div>
@@ -21,7 +21,7 @@ export const UnderLine=(props)=>{
             border:"none",
             marginRight: "2px",
             width: "50%",
-            height: "5px",
+            height: "3px",
             backgroundColor: props.backgroundColor,
           }}
         ></div>
@@ -32,7 +32,7 @@ export const UnderLine=(props)=>{
             border:"none",
             marginRight: "1px",
             width: "15%",
-            height: "5px",
+            height: "3px",
             backgroundColor: props.backgroundColor,
           }}
         ></div>

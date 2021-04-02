@@ -1,0 +1,15 @@
+.his-container{
+  font-family: poppins;
+}
+.h-title{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* font-size: 25px; */
+    color:rgb(82, 82, 82);
+    padding-top: 10px;
+}
+.h-title>i{
+    font-size: 20px;
+    margin-right:5px;
+}

@@ -1,7 +1,7 @@
 export const AuthReducer = (
   state = 
-  // localStorage.getItem("tok") 
-  // || 
+  localStorage.getItem("tok") 
+  || 
   false,
   action
 ) => {
@@ -24,7 +24,16 @@ export const DashbdPersonalReducer = (state = true, action) => {
   switch (action.type) {
     case "DashbdPersonal":
       return !state;
-
+    
+    default:
+      return state;
+  }
+};
+export const HistryPersonalReducer = (state = true, action) => {
+  switch (action.type) {
+    case "HistryPersonal":
+      return !state;
+    
     default:
       return state;
   }

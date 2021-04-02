@@ -3,7 +3,8 @@ import "./Header.css";
 import pencil from "../../Assets/images/pencil.png";
 import { NavLink } from "react-router-dom";
 import {connect} from "react-redux"
-import { AuthChange,Authfalse,changePersonal } from "../../Redux/actions"
+import { AuthChange,Authfalse,changePersonal,changehistryPersonal } from "../../Redux/actions"
+import {history} from "../../router/Router"
 
 const Header = (props) => {
   const [dashboardCnt, setDashboardCnt] = useState(false);
@@ -11,8 +12,9 @@ const Header = (props) => {
   const [i, setI] = useState(0);
   useEffect(() => {
     console.log("running");
-    var active = document.getElementsByClassName("navActive")[0].parentElement;
-    active.style.background = "linear-gradient(90deg,rgba(4, 216, 253, 0.466),rgb(68, 68, 248))";
+    var active = document.getElementsByClassName("navActive")[0].parentElement.parentElement;
+    // active.style.background = "linear-gradient(90deg,rgba(4, 216, 253, 0.466),rgb(68, 68, 248))";
+    active.style.backgroundColor="rgb(100, 128, 255)"
   }, []);
   const personal = () => {
     if(!props.personal){
@@ -24,12 +26,19 @@ const Header = (props) => {
       props.changePersonal()
     }
   }
+
+  const personalhistory=()=>{
+    props.changehisPersonal()
+  }
+  const professionhistory=()=>{
+    props.changehisPersonal()
+  }
   return (
     <div className="Sidebar">
       {console.log("act",ActivityCnt)}
       <div className="Title">
-        <h1>Todo</h1>
-        <img src={pencil} className="pencil" />
+        <h2>Todo</h2>
+        {/* <img src={pencil} className="pencil" /> */}
       </div>
       <div className="NavContainer">
         <div className="eachNav">
@@ -39,29 +48,14 @@ const Header = (props) => {
             </div>
             <text id="Dashboard" className="sidebarText">
               <NavLink
-                to="Dashboard"
+                to="dashboard"
                 className="navClass"
                 activeClassName="navActive"
               >
+                <h5>
                 Dashboard
-              </NavLink>
-              <i
-                class="fas fa-caret-down"
-                onClick={(e) => {
-                  if (dashboardCnt) {
-                    console.log("entering")
-                    setDashboardCnt(false);
-                    e.target.style.transform = "rotate(0deg)";
-                  } else {
-                    console.log("entering")
-                    setDashboardCnt(true);
-                    e.target.style.transform = "rotate(180deg)";
-                  }
-                }}
-              ></i>
-            </text>
-          </div>
-          {dashboardCnt && (
+                </h5>
+                {dashboardCnt && (
             <div className="dropDown">
               {props.personal? <text onClick={()=>{
               personal()
@@ -69,9 +63,6 @@ const Header = (props) => {
                <text onClick={()=>{
                 personal()
                 }} >Personal</text>}
-             
-              <br />
-              <br />
               {!props.personal?
               <text onClick={()=>{
                 profession()
@@ -80,6 +71,28 @@ const Header = (props) => {
               }}>Profession</text>}
             </div>
           )}
+              </NavLink>
+              <i
+                class="fas fa-caret-down"
+                onClick={(e) => {
+                  if(history.location.pathname==="/dashboard"){
+                    if (dashboardCnt) {
+                      console.log("entering")
+                      setDashboardCnt(false);
+                      e.target.style.transform = "rotate(0deg)";
+                    } else {
+                      console.log("entering")
+                      setDashboardCnt(true);
+                      e.target.style.transform = "rotate(180deg)";
+                    }
+                  }
+                  else{
+                    history.push("/dashboard")
+                  }
+                }}
+              ></i>
+            </text>
+          </div>
         </div>
        {console.log(dashboardCnt)}
         <div className="eachNav">
@@ -89,36 +102,51 @@ const Header = (props) => {
             </div>
             <text id="View_Activity" className="sidebarText">
               <NavLink
-                to="/View_Activity"
+                to="/view_activity"
                 className="navClass"
                 activeClassName="navActive"
               >
+                <h5>
                 View Activity
+                </h5>
+                {ActivityCnt && (
+             <div className="dropDown">
+             {props.hispersonal? <text onClick={()=>{
+             personalhistory()
+             }} className="highlight">Personal</text>:
+              <text onClick={()=>{
+               personalhistory()
+               }} >Personal</text>}
+             {!props.hispersonal?
+             <text onClick={()=>{
+               professionhistory()
+             }} className="highlight">Profession</text>:<text onClick={()=>{
+               professionhistory()
+             }}>Profession</text>}
+           </div>
+          )}
               </NavLink>
               <i
                 class="fas fa-caret-down"
                 onClick={(e) => {
-                  if (ActivityCnt) {
-                    setActivityCnt(false);
-                    e.target.style.transform = "rotate(0deg)";
-                  } else {
-                    setActivityCnt(true);
-                    e.target.style.transform = "rotate(180deg)";
+                  if(history.location.pathname==="/view_activity"){
+                    if (ActivityCnt) {
+                      setActivityCnt(false);
+                      e.target.style.transform = "rotate(0deg)";
+                    } else {
+                      setActivityCnt(true);
+                      e.target.style.transform = "rotate(180deg)";
+                    }
                   }
+                  else{
+                    history.push("/view_activity")
+                  }
+                 
                 }}
               ></i>
             </text>
             <div></div>
           </div>
-          {ActivityCnt && (
-            <div className="dropDown">
-              
-              <text>Personal</text>
-              <br />
-              <br />
-              <text>Profession</text>
-            </div>
-          )}
         </div>
         <div className="eachNav">
           <div className="iconDiv">
@@ -129,7 +157,9 @@ const Header = (props) => {
                 to="Profile"
                 className="navClass"
                 activeClassName="navActive"
-              >Profile</NavLink></text>
+              >
+                <h5>Profile</h5>
+                </NavLink></text>
             <div></div>
           </div>
         </div>
@@ -138,7 +168,7 @@ const Header = (props) => {
             <div className="sideIcon">
               <i class="fa fa-power-off" aria-hidden="true"></i>
             </div>
-            <text className="sidebarText">Logout</text>
+            <text className="sidebarText"><h5>Logout</h5></text>
             <div></div>
           </div>
         </div>
@@ -149,12 +179,14 @@ const Header = (props) => {
  const mapStateToProps = (state) => ({
   isAuthenticated: state.Auth,
   personal: state.Dasbd,
+  hispersonal:state.History
 });
 
  const mapDispatchToProps=(dispatch)=>({
   AuthChange:()=>dispatch(AuthChange()),
   Authfalse:()=>dispatch(Authfalse()),
-  changePersonal:()=>dispatch(changePersonal())
+  changePersonal:()=>dispatch(changePersonal()),
+  changehisPersonal:()=>dispatch(changehistryPersonal())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);

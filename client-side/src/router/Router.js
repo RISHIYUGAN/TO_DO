@@ -16,9 +16,9 @@ export const AppRouter = () => (
     <div>         
       <Switch>
         <PublicRoute path="/" component={Login} exact={true} />
-        <PrivateRoute path="/Dashboard" component={Dashboard} />
-        <PrivateRoute path="/View_Activity" component={ViewActivity} />
-        <PrivateRoute path="/Profile" component={Profile} />
+        <PrivateRoute path="/dashboard" component={Dashboard} />
+        <PrivateRoute path="/view_activity" component={ViewActivity} />
+        <PrivateRoute path="/profile" component={Profile} />
       </Switch>
     </div>
   </Router>
