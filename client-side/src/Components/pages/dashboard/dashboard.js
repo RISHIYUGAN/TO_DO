@@ -9,6 +9,7 @@ import { CircularProgressbarWithChildren } from "react-circular-progressbar";
 
 import "react-circular-progressbar/dist/styles.css";
 import moment from "moment";
+import { da } from "date-fns/locale";
 
 const Dashboard = (props) => {
   const [personal, setPersonal] = useState(props.personal);
@@ -43,11 +44,12 @@ const Dashboard = (props) => {
   let prsts = 0;
   useEffect(() => {
     console.log("runningd");
+    console.log(moment().format('DD/MM/YYYY'))
     axios
       .post("http://localhost:3000/activity", {
         token: localStorage.getItem("tok"),
         type: props.personal?"personal":"professional",
-        date:moment()
+        date:moment().format('DD/MM/YYYY')
       })
       .then((res)=>{
         if(props.personal){
