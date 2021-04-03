@@ -14,10 +14,10 @@ import { da } from "date-fns/locale";
 const Dashboard = (props) => {
   const [personal, setPersonal] = useState(props.personal);
   const [personalworklist, setPersonalworklist] = useState([
-    // { content: "eat", completed: false },
-    // { content: "sleep", completed: false },
-    // { content: "rule", completed: true },
-    // { content: "conquer", completed: true },
+    { content: "eat", completed: false },
+    { content: "sleep", completed: false },
+    { content: "rule", completed: true },
+    { content: "conquer", completed: true },
   ]);
   const [Professionalworklist, setProfessionalworklist] = useState([
     // { content: "do my application", completed: false },
@@ -52,11 +52,11 @@ const Dashboard = (props) => {
         date:moment().format('DD/MM/YYYY')
       })
       .then((res)=>{
-        if(props.personal){
-          setPersonalworklist(res.data)
+        if(res.data.type==="personal"){
+          setPersonalworklist(res.data.dailyactivity)
         }
         else{
-          setProfessionalworklist(res.data)
+          setProfessionalworklist(res.data.dailyactivity)
         }
       }
        
@@ -128,35 +128,36 @@ const Dashboard = (props) => {
   };
   const personalcomplete = (index, e) => {
       if(e.target.innerHTML==="Mark as done"){
-       const update=[...personalworklist]
-       update[index].completed=true;
-       update.splice(personal.length,0,personal[index])
-       update.splice(index,1)
-       axios
-       .post("http://localhost:3000/mark", {
-         token: localStorage.getItem("tok"),
-         dailyactivity:update,
-         type:props.personal?"personal":"professional",
-         date:moment().format('DD/MM/YYYY')
-       }).then((res)=>{
-         console.log(res.data)
-         setPersonalworklist(update)
-       })
-     console.log(update)
+      //  const update=[...personalworklist]
+      //  update[index].completed=true;
+      //  update.splice(personal.length,0,personal[index])
+      //  update.splice(index,1)
+      
+      const update = [...personalworklist];
+      update[index].completed = true;
+      update.splice(personalworklist.length, 0, personalworklist[index]);
+      update.splice(index, 1);
+      axios
+      .post("http://localhost:3000/mark", {
+        token: localStorage.getItem("tok"),
+        dailyactivity:update,
+        type:props.personal?"personal":"professional",
+        date:moment().format('DD/MM/YYYY')
+      }).then((res)=>{
+        console.log(res.data)
+        res.data.type==="personal"?
+        setPersonalworklist(res.data.activities):
+        setProfessionalworklist(res.data.activities)
+        pests = 0;
+        {
+          update.map((work) => {
+            work.completed === true && pests++;
+          });
+        }
+        setPsnlsts(pests);
+        setPsnlPercentage(Math.round((pests / update.length) * 100));
+        })
       }
-    const update = [...personalworklist];
-    update[index].completed = true;
-    update.splice(personalworklist.length, 0, personalworklist[index]);
-    update.splice(index, 1);
-    setPersonalworklist(update);
-    pests = 0;
-    {
-      update.map((work) => {
-        work.completed === true && pests++;
-      });
-    }
-    setPsnlsts(pests);
-    setPsnlPercentage(Math.round((pests / update.length) * 100));
   };
   const completeprofessional = (index, e) => {
     const update = [...Professionalworklist];
