@@ -61,7 +61,7 @@ const Dashboard = (props) => {
         }
       }
       )
-  }, []);
+  }, [props.personal]);
   useEffect(() => {
     {
       personalworklist.map((work) => {
@@ -94,17 +94,6 @@ const Dashboard = (props) => {
   };
   const submitting = (e) => {
     e.preventDefault();
-    // console.log(e.target.test.value);
-    // const value = e.target.test.value;
-    // let update=null;
-    // if(props.personal===true){
-    // update=[{content:e.target.test.value,completed:false},...personalworklist]
-    // }
-    // else{
-    //    update=[{content:e.target.test.value,completed:false},...Professionalworklist]
-    // }
-    // console.log(update)
-    // setPersonalworklist(update)
     axios
       .post("http://localhost:3000/update_todo", {
         token: localStorage.getItem("tok"),
@@ -130,11 +119,6 @@ const Dashboard = (props) => {
   };
   const personalcomplete = (index, e) => {
       if(e.target.innerHTML==="Mark as done"){
-      //  const update=[...personalworklist]
-      //  update[index].completed=true;
-      //  update.splice(personal.length,0,personal[index])
-      //  update.splice(index,1)
-      
       const update = [...personalworklist];
       update[index].completed = true;
       update.splice(personalworklist.length, 0, personalworklist[index]);
@@ -144,7 +128,7 @@ const Dashboard = (props) => {
       .post("http://localhost:3000/mark", {
         token: localStorage.getItem("tok"),
         dailyactivity:update,
-        type:props.personal?"personal":"professional",
+        type:"personal",
         date:moment().format('DD/MM/YYYY')
       }).then((res)=>{
         console.log("res",res.data)
@@ -156,9 +140,7 @@ const Dashboard = (props) => {
         }
         setPsnlsts(pests);
         setPsnlPercentage(Math.round((pests / update.length) * 100));
-        res.data.type==="personal"?
-        setPersonalworklist(update):
-        setProfessionalworklist(update)
+        setPersonalworklist(update)
         })
         }
       
@@ -168,30 +150,48 @@ const Dashboard = (props) => {
     update[index].completed = true;
     update.splice(Professionalworklist.length, 0, Professionalworklist[index]);
     update.splice(index, 1);
-    setProfessionalworklist(update);
-    prsts = 0;
-    {
-      update.map((work) => {
-        work.completed === true && prsts++;
-      });
-    }
-    setPrfsnsts(prsts);
-    setPrfsnPercentage(Math.round((prsts / update.length) * 100));
+    axios
+    .post("http://localhost:3000/mark", {
+      token: localStorage.getItem("tok"),
+      dailyactivity:update,
+      type:"professional",
+      date:moment().format('DD/MM/YYYY')
+    }).then((res)=>{
+      console.log("res",res.data)
+      prsts = 0;
+      {
+        update.map((work) => {
+          work.completed === true && prsts++;
+        });
+      }
+      setPrfsnsts(prsts);
+      setPrfsnPercentage(Math.round((prsts / update.length) * 100));
+      setPersonalworklist(update)
+      })
   };
 
   const prfsdelete = (index) => {
     console.log(index);
     const copy = [...Professionalworklist];
     copy.splice(index, 1);
-    setProfessionalworklist(copy);
-    prsts = 0;
-    {
-      copy.map((work) => {
-        work.completed === true && prsts++;
-      });
-    }
-    setPrfsnsts(prsts);
-    setPrfsnPercentage(Math.round((prsts / copy.length) * 100));
+  
+    axios
+    .post("http://localhost:3000/mark", {
+      token: localStorage.getItem("tok"),
+      dailyactivity:copy,
+      type:"professional",
+      date:moment().format('DD/MM/YYYY')
+    }).then((res)=>{
+      prsts = 0;
+      {
+        copy.map((work) => {
+          work.completed === true && prsts++;
+        });
+      }
+      setPrfsnsts(prsts);
+      setPrfsnPercentage(Math.round((prsts / copy.length) * 100));
+      })
+      setProfessionalworklist(copy);
   };
 
   const personaldelete = (index) => {
@@ -199,7 +199,15 @@ const Dashboard = (props) => {
     const copy = [...personalworklist];
     copy.splice(index, 1);
     setPersonalworklist(copy);
-    pests = 0;
+    axios
+      .post("http://localhost:3000/mark", {
+        token: localStorage.getItem("tok"),
+        dailyactivity:copy,
+        type:"personal",
+        date:moment().format('DD/MM/YYYY')
+      }).then((res)=>{
+        console.log("res",res.data)
+        pests = 0;
     {
       copy.map((work) => {
         work.completed === true && pests++;
@@ -207,6 +215,9 @@ const Dashboard = (props) => {
     }
     setPsnlsts(pests);
     setPsnlPercentage(Math.round((pests / copy.length) * 100));
+        setPersonalworklist(copy)
+        })
+   
   };
 
   return (
