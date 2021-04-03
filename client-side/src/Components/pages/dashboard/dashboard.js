@@ -146,8 +146,8 @@ const Dashboard = (props) => {
       }).then((res)=>{
         console.log("res",res.data)
         res.data.type==="personal"?
-        setPersonalworklist(res.data.activities):
-        setProfessionalworklist(res.data.activities)
+        setPersonalworklist(update):
+        setProfessionalworklist(update)
         pests = 0;
         {
           update.map((work) => {
