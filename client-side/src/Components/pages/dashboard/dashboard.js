@@ -94,37 +94,39 @@ const Dashboard = (props) => {
   };
   const submitting = (e) => {
     e.preventDefault();
-    // console.log(e.target.test.value);
-    // const value = e.target.test.value;
-    // let update=null;
-    // if(props.personal===true){
-    // update=[{content:e.target.test.value,completed:false},...personalworklist]
-    // }
-    // else{
-    //    update=[{content:e.target.test.value,completed:false},...Professionalworklist]
-    // }
-    // console.log(update)
-    axios
-      .post("http://localhost:3000/update_todo", {
-        token: localStorage.getItem("tok"),
-        dailyactivity:e.target.test.value,
-        type: props.personal?"personal":"professional",
-        date:moment().format('DD/MM/YYYY')
-      })
-      .then((res) => {
-        console.log("response:", res.data);
-        if(res.data.type==="personal"){
-          setPersonalworklist(res.data.activities)
-        }
-        else{
-          setProfessionalworklist(res.data.activities)
-        }
-        // setWorklist([{content:e.target.test.value,completed:false},...worklist])
-        e.target.test.value = "";
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    console.log(e.target.test.value);
+    const value = e.target.test.value;
+    let update=null;
+    if(props.personal===true){
+    update=[{content:e.target.test.value,completed:false},...personalworklist]
+    }
+    else{
+       update=[{content:e.target.test.value,completed:false},...Professionalworklist]
+    }
+    console.log(update)
+    setPersonalworklist(update)
+    // axios
+    //   .post("http://localhost:3000/update_todo", {
+    //     token: localStorage.getItem("tok"),
+    //     dailyactivity:e.target.test.value,
+    //     type: props.personal?"personal":"professional",
+    //     date:moment().format('DD/MM/YYYY')
+    //   })
+    //   .then((res) => {
+    //     console.log("response:", res.data);
+    //     if(res.data.type==="personal"){
+    //       setPersonalworklist(res.data.activities)
+    //     }
+    //     else{
+    //       setProfessionalworklist(res.data.activities)
+    //     }
+        
+    //     e.target.test.value = "";
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
+      
   };
   const personalcomplete = (index, e) => {
       if(e.target.innerHTML==="Mark as done"){
@@ -146,9 +148,6 @@ const Dashboard = (props) => {
         date:moment().format('DD/MM/YYYY')
       }).then((res)=>{
         console.log("res",res.data)
-        res.data.type==="personal"?
-        setPersonalworklist(update):
-        setProfessionalworklist(update)
         pests = 0;
         {
           update.map((work) => {
@@ -157,8 +156,14 @@ const Dashboard = (props) => {
         }
         setPsnlsts(pests);
         setPsnlPercentage(Math.round((pests / update.length) * 100));
+        res.data.type==="personal"?
+        setPersonalworklist(update):
+        setProfessionalworklist(update)
         })
+       
+        
       }
+      
   };
   const completeprofessional = (index, e) => {
     const update = [...Professionalworklist];
