@@ -14,10 +14,10 @@ import { da } from "date-fns/locale";
 const Dashboard = (props) => {
   const [personal, setPersonal] = useState(props.personal);
   const [personalworklist, setPersonalworklist] = useState([
-    { content: "eat", completed: false },
-    { content: "sleep", completed: false },
-    { content: "rule", completed: true },
-    { content: "conquer", completed: true },
+    // { content: "eat", completed: false },
+    // { content: "sleep", completed: false },
+    // { content: "rule", completed: true },
+    // { content: "conquer", completed: true },
   ]);
   const [Professionalworklist, setProfessionalworklist] = useState([
     // { content: "do my application", completed: false },
