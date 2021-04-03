@@ -144,7 +144,7 @@ const Dashboard = (props) => {
         type:props.personal?"personal":"professional",
         date:moment().format('DD/MM/YYYY')
       }).then((res)=>{
-        console.log(res.data)
+        console.log("res",res.data)
         res.data.type==="personal"?
         setPersonalworklist(res.data.activities):
         setProfessionalworklist(res.data.activities)
