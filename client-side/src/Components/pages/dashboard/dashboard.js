@@ -52,6 +52,7 @@ const Dashboard = (props) => {
         date:moment().format('DD/MM/YYYY')
       })
       .then((res)=>{
+        console.log(res.data)
         if(res.data.type==="personal"){
           setPersonalworklist(res.data.dailyactivity)
         }
@@ -59,7 +60,6 @@ const Dashboard = (props) => {
           setProfessionalworklist(res.data.dailyactivity)
         }
       }
-       
       )
   }, []);
   useEffect(() => {
