@@ -137,6 +137,7 @@ const Dashboard = (props) => {
       update[index].completed = true;
       update.splice(personalworklist.length, 0, personalworklist[index]);
       update.splice(index, 1);
+      console.log(update)
       axios
       .post("http://localhost:3000/mark", {
         token: localStorage.getItem("tok"),
