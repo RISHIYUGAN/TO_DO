@@ -166,7 +166,7 @@ const Dashboard = (props) => {
       }
       setPrfsnsts(prsts);
       setPrfsnPercentage(Math.round((prsts / update.length) * 100));
-      setPersonalworklist(update)
+      setProfessionalworklist(update)
       })
   };
 
