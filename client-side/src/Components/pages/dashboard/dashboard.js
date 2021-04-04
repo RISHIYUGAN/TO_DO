@@ -415,9 +415,60 @@ const Dashboard = (props) => {
                   </text>
                 </text>
               </div>
-              <button className="AddWrksBtn">Add Works +</button>
+              <button className="AddWrksBtn"  onClick={() => {
+              var container = document.querySelector(".inputContainer");
+              container.style.top = "0px";
+            }}>Add Works +</button>
             </div>
             <div className="todoList">
+            <form
+          onSubmit={(e) => {
+            submitting(e);
+          }}
+        >
+          <div className="inputContainer">
+            <div className="exitDiv">
+              <div
+                className="exit"
+                onClick={() => {
+                  var container = document.querySelector(".inputContainer");
+                  container.style.top = "-200px";
+                }}
+              >
+                <div className="ediv_1"></div>
+                <div className="ediv_2"></div>
+              </div>
+            </div>
+            <div className="input-wrapper">
+            <label>Enter your work</label>
+              <div>
+              <div
+                className="inputDiv"
+                onFocus={() => {
+                  var inputDiv = document.querySelector(".inputDiv");
+                  // inputDiv.style.boxShadow="0 0 8px rgb(200, 200, 200)"
+                  inputDiv.style.border="1px solid rgb(108, 108, 255)"
+                }}
+                onBlur={() => {
+                  var inputDiv = document.querySelector(".inputDiv");
+                  inputDiv.style.boxShadow = "none";
+                  inputDiv.style.border="1px solid white"
+                }}
+              >
+                <i class="fa fa-tasks fa-lg"></i>
+               
+                <input
+                  name="test"
+                  className="d-input"
+                  type="text"
+                />
+                
+              </div>
+              <button className="Add-Button"><h3>Add +</h3></button>
+              </div>
+            </div>
+          </div>
+        </form>
               {Professionalworklist.map((work) => (
                 <div
                   className="eachWork"
